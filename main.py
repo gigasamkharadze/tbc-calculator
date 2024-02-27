@@ -26,6 +26,12 @@ class MyWindow(QMainWindow):
         self.BC_input_rectangle.valueChanged.connect(self.update_rectangle_output)
         self.home_button_rectangle.clicked.connect(self.to_home)
         self.next_button_rectangle.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
+        # trapezoid
+        self.AB_input_trapezoid.valueChanged.connect(self.update_trapezoid_output)
+        self.BC_input_trapezoid.valueChanged.connect(self.update_trapezoid_output)
+        self.CD_input_trapezoid.valueChanged.connect(self.update_trapezoid_output)
+        self.AD_input_trapezoid.valueChanged.connect(self.update_trapezoid_output)
+        self.home_button_trapezoid.clicked.connect(self.to_home)
 
     def update_triangle_output(self):
         a, b, c = self.AB_input.value(), self.BC_input.value(), self.AC_input.value()
@@ -43,8 +49,24 @@ class MyWindow(QMainWindow):
         a, b = self.AB_input_rectangle.value(), self.BC_input_rectangle.value()
         area = a * b
         p = 2 * (a + b) if a > 0 and b > 0 else 0
-        self.area_output_rectangle.setText(f'{area:.2f}')
-        self.perimeter_output_rectangle.setText(f'{p:.2f}')
+        if area > 0:
+            self.area_output_rectangle.setText(f'{area:.2f}')
+            self.perimeter_output_rectangle.setText(f'{p:.2f}')
+        else:
+            self.area_output_rectangle.setText(f'Not a valid rectangle.')
+            self.perimeter_output_rectangle.setText(f'Not a valid rectangle.')
+
+    def update_trapezoid_output(self):
+        a, b, c, d = (self.AB_input_trapezoid.value(), self.BC_input_trapezoid.value(), self.CD_input_trapezoid.value(),
+                      self.AD_input_trapezoid.value())
+        if a > 0 and b > 0 and c > 0 and d > 0:
+            area = (a + b) * c / 2
+            p = a + b + c + d
+            self.area_output_trapezoid.setText(f'{area:.2f}')
+            self.perimeter_output_trapezoid.setText(f'{p:.2f}')
+        else:
+            self.area_output_trapezoid.setText(f'Not a valid trapezoid.')
+            self.perimeter_output_trapezoid.setText(f'Not a valid trapezoid.')
 
     def to_home(self):
         self.stackedWidget.setCurrentIndex(1)
