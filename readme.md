@@ -17,6 +17,11 @@ the area and perimeter of various geometric figures.
 
 ## Installation
 
+To install the application, You can run the 
+executable file from the repository, or you can clone the repository and run the application from the source code.
+
+To clone the repository and run the application from the source code, follow these steps:
+
 1. Clone the repository:
 
     ```bash
